@@ -2,11 +2,20 @@
 
 namespace Convertonet\Views{
     class Categories extends SimpleView{
+        protected $viewCss = array(
+            'resources/styles/categories.css'
+        );
+        protected $viewJs = array(
+            'javascript/Category.js'
+        );
         public function getContent(){
             $html = $this->getCategoriesHtml();
             $html .= $this->getGamesHtml();
             
             return $html;
+        }
+        protected function getViewJs(){    
+            return $this->viewJs;            
         }
         private function getCategoriesHtml(){            
             $categories = $this->vm->getCategories();
@@ -33,9 +42,14 @@ namespace Convertonet\Views{
             $html  = '<div class="container-fluid games">';
             
             foreach($games as $game){                
-                $html .= '<div class="col-xs-4 game-wrapper">'.
-                        '<div class="game">'.
-                        '<a class="head" href='.''.'>'.
+                $html .= '<div class="col-xs-4 game-wrapper" '.
+                       "data-game-name='{$game->game_name}' " .
+                       "data-game-code='{$game->game_code}' " .
+                       "data-machine-id='{$game->machine_id}' " .
+                       "data-denominations='{$game->denominations}' ".
+                       "data-hands='{$game->hands}'>".
+                        '<div class="game">'.                       
+                        '<a class="head">'.
                         $game->game_name.
                         '</a>'.
                         '<div class="body">'.                        

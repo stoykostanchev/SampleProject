@@ -2,40 +2,48 @@
 
 namespace Convertonet\Views{
     abstract class View{                
-        private static $css = array(
+        private $css = array(
             'utils/external/bootstrap-3.2.0-dist/css/bootstrap.css',
-            'utils/external/bootstrap-3.2.0-dist/css/bootstrap-theme.css',
-            'resources/styles/categories.css'            
+            'utils/external/bootstrap-3.2.0-dist/css/bootstrap-theme.css'            
         );
-        private static $js = array();
+        private $js = array(
+            'javascript/Convertonet.js'
+        );
+        protected $viewJs = array();
+        protected $viewCss = array();
         
-        public function wrap($content){
+        public function wrap($content){        
             $html = '<!DOCTYPE html>' .
                     '<html lang="en">' .
-                    '<head>' . self::getHeadHtml() . '</head>'.
+                    '<head>' . $this->getHeadHtml() . '</head>'.
                     '<body class="body">' . $content . '</body>' . 
                     '</html>'; 
             return $html;
         }
-        public static function getHeadHtml(){            
+        public function getHeadHtml(){            
             return '<title>'. 'Controvet' . '</title>'
-                    . self::getCssIncludes() 
-                    . self::getJsIncludes();
+                    . $this->getCssIncludes() 
+                    . $this->getJsIncludes();
         }
-        private static function getJsIncludes(){
+        private function getJsIncludes(){
             $html = '';
             
-            foreach(self::$js as $url){
-                $html .= "<script type='text/javascript' src='{$url}'>";
+            foreach(array_merge($this->js, $this->viewJs) as $url){
+                $html .= "<script type='text/javascript' src='{$url}'></script>";
             }
+            
+            return $html;
         }
-        private static function getCssIncludes(){
+        private function getCssIncludes(){
             $html = '';
             
-            foreach(self::$css as $url){
+            foreach(array_merge($this->css, $this->viewCss) as $url){
                 $html .= "<link rel='stylesheet' type='text/css' href='{$url}'>";
             }
             return $html;
+        }
+        protected function getViewJs(){            
+            return $this->viewJs;            
         }
         abstract public function display();
     }
