@@ -21,6 +21,12 @@ namespace Convertonet\Views{
             $html .= '</div>';
             return $html;
         }
+        
+        private function buildPicUrl($game_name){
+            $remove_chars = array(',','!','"',"'",'?','-',' ');
+            $name = str_replace($remove_chars, '', strtolower($game_name));    
+            return 'http://cacheimg.casinomidas.com/images/www/games/minipods/'.$name.'-minipod.jpg';
+        }
         private function getGamesHtml(){
             $games = $this->vm->getAllGames();
             
@@ -29,11 +35,13 @@ namespace Convertonet\Views{
             foreach($games as $game){                
                 $html .= '<div class="col-xs-4 game-wrapper">'.
                         '<div class="game">'.
-                        '<a class="head" href=#> '.$game->game_name.' </a>'.
+                        '<a class="head" href='.''.'>'.
+                        $game->game_name.
+                        '</a>'.
                         '<div class="body">'.
-                        '<img src=""></img>'
-                       .'</div>' 
-                       .'</div>' .
+                        '<img src="'.$this->buildPicUrl($game->game_name).'"></img>'.
+                       '</div>' .
+                       '</div>' .
                         '</div>';
             }
             $html .= '</div>';
