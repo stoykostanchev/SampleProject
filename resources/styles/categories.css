@@ -35,9 +35,29 @@ BODY.body{
 }
 .game .body{    
     width : 100%;
-    /*height: 0px;*/ 
+    position: relative;
+    cursor: pointer;
 }
+
+.game .body .mask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 40%;
+    font-size: 22px;
+    color: orange;
+    font-weight: bold;
+    text-decoration: underline;
+    display: none;
+    background: url('../images/play.gif') no-repeat center top; 
+    padding-top: 40px;
+    text-align: center;
+}    
+.game .body:hover .mask{
+    display: block;
+}    
 
 .game .body img{
     width: 100%;
+    cursor: pointer;
 }

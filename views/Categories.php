@@ -38,9 +38,10 @@ namespace Convertonet\Views{
                         '<a class="head" href='.''.'>'.
                         $game->game_name.
                         '</a>'.
-                        '<div class="body">'.
+                        '<div class="body">'.                        
+                        '<div class="mask">Play Now</div>'.
                         '<img src="'.$this->buildPicUrl($game->game_name).'"></img>'.
-                       '</div>' .
+                        '</div>'.
                        '</div>' .
                         '</div>';
             }
