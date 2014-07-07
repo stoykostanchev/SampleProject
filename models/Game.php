@@ -1,7 +1,7 @@
 <?php
 namespace Convertonet\Models{
     class Game extends AbstractModel{
-        public static function getByCategory($cat){
+        public static function getByCategory($cat){            
             $json = \Convertonet\Utils\Db\Readers\JSON::readFile(
                   \Convertonet\Utils\Routing\PathsConfig::$BASE_PATH.'/resources/json/games.json'                  
             );
